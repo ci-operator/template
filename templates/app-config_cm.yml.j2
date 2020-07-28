@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  app_params: |-
+{% for key, val in app_params.items() %}
+    {{ key }}: {{ val }}
+{% endfor %}
+  app_repo: {{ app_repo }}
+  app_commit: '{{ app_commit }}'
+  app_branch: '{{ app_branch }}'
+  app_template: {{ app_template }}
+  app_owner: {{ app_owner }}
+kind: ConfigMap
+metadata:
+  name: app-config-{{ app_template|regex_replace('\\.yaml','') }}
