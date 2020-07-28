@@ -33,7 +33,7 @@
     app_commit: "{{ app_remote_ref.results[0].stdout }}"
 
 - name: Check for app-config in project
-  shell: oc get cm -n {{ oc_project }} app-config-{{ app_template|regex_replace('.yaml$','') }} --export=true -o yaml | grep -v 'creationTimestamp:\|selfLink:'
+  shell: oc get cm -n {{ oc_project }} app-config-{{ app_name|default(app_template|regex_replace('.yaml$','')) }} --export=true -o yaml | grep -v 'creationTimestamp:\|selfLink:'
   changed_when: false
   failed_when: (app_config_cm.rc != 0) and
                (app_config_cm.stderr|default('') is not search('NotFound'))

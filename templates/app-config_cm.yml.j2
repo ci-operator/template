@@ -11,4 +11,4 @@ data:
   app_owner: {{ app_owner }}
 kind: ConfigMap
 metadata:
-  name: app-config-{{ app_template|regex_replace('\\.yaml','') }}
+  name: app-config-{{ app_name|default(app_template|regex_replace('\\.yaml','')) }}
